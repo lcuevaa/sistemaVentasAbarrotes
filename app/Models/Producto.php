@@ -17,22 +17,26 @@ class Producto extends Model
     }
 
     //Relación de muchos a muchos usando tabla pivote
-    public function ventas(){
+    public function ventas()
+    {
         return $this->belongsToMany(Venta::class)->withTimestamps()
-        ->withPivot('cantidad', 'precio_venta', 'descuento');
+            ->withPivot('cantidad', 'precio_venta', 'descuento');
     }
 
     //Relación de muchos a muchos con categoria
-    public function categorias(){
+    public function categorias()
+    {
         return $this->belongsToMany(Categoria::class)->withTimestamps();
     }
 
     //Relación de uno a muchos con marca relación a la inversa
-    public function marca(){
+    public function marca()
+    {
         return $this->belongsTo(Marca::class);
     }
     //Relación a la inversa de uno a muchos con presentación
-    public function presentacione(){
+    public function presentacione()
+    {
         return $this->belongsTo(Presentacione::class);
     }
 }
