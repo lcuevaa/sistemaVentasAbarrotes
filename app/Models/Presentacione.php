@@ -19,4 +19,9 @@ class Presentacione extends Model
     {
         return $this->belongsTo(Caracteristica::class);
     }
+
+    // Para realizar la asignación masiva, tenemos que poseer la propiedad fillable tanto en
+    // característica como en categoria
+    // Fillable va a tener un arreglo de los campos que deseamos llenar
+    protected $fillable = ['caracteristica_id'];
 }

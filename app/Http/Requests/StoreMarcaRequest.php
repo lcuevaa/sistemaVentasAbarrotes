@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoriaRequest extends FormRequest
+class StoreMarcaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,10 @@ class StoreCategoriaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //Aca se pone las reglas de validación de acuerdo a la base de daots
+            //Reglas de validación de acuerdo a la base de datos
             'nombre' => 'required|max:60|unique:caracteristicas,nombre',
             'descripcion' => 'nullable|max:255'
         ];
-        //si no se cumplen estas reglas no se ejecutara el controller de categoria.store
+        //si no se cumplen estas reglas no se ejecutara el controller de marca.store
     }
 }

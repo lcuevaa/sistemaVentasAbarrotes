@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\categoriaController;
+use App\Http\Controllers\marcaController;
+use App\Http\Controllers\presentacionController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -9,7 +11,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/panel', 'panel.index')->name('panel');
 
-Route::resource('categorias', categoriaController::class);
+Route::resources([
+    'categorias' => categoriaController::class,
+    'marcas' => marcaController::class,
+    'presentaciones' => presentacionController::class
+]);
+
 
 Route::get('/login', function () {
     return view('auth.login');

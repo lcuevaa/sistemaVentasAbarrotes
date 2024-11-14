@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoriaRequest extends FormRequest
+class StorePresentacionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +26,6 @@ class StoreCategoriaRequest extends FormRequest
             'nombre' => 'required|max:60|unique:caracteristicas,nombre',
             'descripcion' => 'nullable|max:255'
         ];
-        //si no se cumplen estas reglas no se ejecutara el controller de categoria.store
+        //si no se cumplen estas reglas no se ejecutara el controller de marca.store
     }
 }

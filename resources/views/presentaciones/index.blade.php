@@ -1,6 +1,6 @@
-@extends ('template')
+@extends('template')
 
-@section('title','categorias')
+@section('title','presentaciones')
 
 @push('css')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -9,34 +9,32 @@
 @endpush
 
 @section('content')
-
 <!-- Cada vez que nuestra sesión tenga la clave succes quiero que muestre esto -->
 @if (session('success'))
 <script>
-let message = "{{session('success')}}"
-const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2500,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-    }
-});
-Toast.fire({
-    icon: "success",
-    title: message
-});
+    let message = "{{session('success')}}"
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: "success",
+        title: message
+    });
 </script>
-
 @endif
 
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h1 class="fw-bold mb-3">Categorias</h1>
+            <h1 class="fw-bold mb-3">Presentaciones</h1>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                     <a href="{{route('panel')}}">
@@ -47,11 +45,11 @@ Toast.fire({
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="">Categorias</a>
+                    <a href="">Presentaciones</a>
                 </li>
             </ul>
             <div class="ms-md-auto py-1 py-md-0">
-                <a href="{{route('categorias.create')}}" class="btn btn-primary btn-round">Agregar Categoria</a>
+                <a href="{{route('presentaciones.create')}}" class="btn btn-primary btn-round">Agregar Presentación</a>
             </div>
         </div>
         <div class="card">
@@ -71,12 +69,12 @@ Toast.fire({
                         </thead>
                         <tbody>
                             <!-- Para recorrer usamos foreach y creamos una variable -->
-                            @foreach ( $categorias as $categoria)
+                            @foreach ( $presentaciones as $presentacione)
                             <tr>
-                                <td>{{$categoria->caracteristica->nombre}}</td>
-                                <td>{{$categoria->caracteristica->descripcion}}</td>
+                                <td>{{$presentacione->caracteristica->nombre}}</td>
+                                <td>{{$presentacione->caracteristica->descripcion}}</td>
                                 <td>
-                                    @if($categoria->caracteristica->estado==1)
+                                    @if($presentacione->caracteristica->estado ==1)
                                     <spam>Activo</spam>
                                     @else
                                     <spam>Inactivo</spam>
@@ -85,22 +83,23 @@ Toast.fire({
                                 <td class="text-center">
                                     <div class="btn-group justify-content-center" role="group"
                                         aria-label="Basic mixed styles example">
-                                        <!-- Se pone la ruta, y para editar hace falta enviar la categoria a editar, para ello se pone lo de despues del corchete -->
-                                        <form action="{{route('categorias.edit', ['categoria'=>$categoria])}}"
+                                        <!-- Se pone la ruta, y para editar hace falta enviar la marca a editar, para ello se pone lo de despues del corchete -->
+                                        <form
+                                            action="{{route('presentaciones.edit', ['presentacione'=>$presentacione])}}"
                                             method="get">
                                             @csrf
                                             <button type="submit" class="btn btn-outline-primary me-2">Editar</button>
                                         </form>
-                                        @if ($categoria->caracteristica->estado==1)
+                                        @if ($presentacione->caracteristica->estado==1)
                                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                                            data-bs-target="#confirmModalCenterTitle-{{$categoria->id}}">
-                                            <!-- Se envia el id de la categoria a eliminar(cambiar estado) -->
+                                            data-bs-target="#confirmModalCenterTitle-{{$presentacione->id}}">
+                                            <!-- Se envia el id de la marca a eliminar(cambiar estado) -->
                                             Desactivar
                                         </button>
                                         @else
                                         <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                                            data-bs-target="#confirmModalCenterTitle-{{$categoria->id}}">
-                                            <!-- Se envia el id de la categoria a eliminar(cambiar estado) -->
+                                            data-bs-target="#confirmModalCenterTitle-{{$presentacione->id}}">
+                                            <!-- Se envia el id de la marca a eliminar(cambiar estado) -->
                                             Restaurar
                                         </button>
                                         @endif
@@ -108,9 +107,9 @@ Toast.fire({
                                 </td>
 
                                 <!-- Modal -->
-                                <!-- En el id se recive la información de la categoria a eliminar -->
-                                <div class="modal fade" id="confirmModalCenterTitle-{{$categoria->id}}" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <!-- En el id se recive la información de la marca a eliminar -->
+                                <div class="modal fade" id="confirmModalCenterTitle-{{$presentacione->id}}"
+                                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -120,12 +119,13 @@ Toast.fire({
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <!-- Para que aparezca el nombre de la categoria -->
-                                                {{$categoria->caracteristica->estado==1 ? '¿Estás seguro que quieres desactivar esta categoria?':'¿Estás seguro que quieres activar esta categoria?'}}
-                                                <!-- {{$categoria->id}} -->
+                                                <!-- Para que aparezca el nombre de la marca -->
+                                                {{$presentacione->caracteristica->estado==1 ? '¿Estás seguro que quieres desactivar esta presentacion?':'¿Estás seguro que quieres activar esta presentación?'}}
+
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="{{route('categorias.destroy',['categoria'=>$categoria])}}"
+                                                <form
+                                                    action="{{route('presentaciones.destroy',['presentacione'=>$presentacione])}}"
                                                     method="post">
                                                     @method('DELETE')
                                                     @csrf
@@ -148,18 +148,17 @@ Toast.fire({
 
 @push('js')
 <script>
-$(document).ready(function() {
-    $("#basic-datatables").DataTable({});
-});
+    $(document).ready(function() {
+        $("#basic-datatables").DataTable({});
+    });
 </script>
 
 <script>
-const myModal = document.getElementById('myModal')
-const myInput = document.getElementById('myInput')
+    const myModal = document.getElementById('myModal')
+    const myInput = document.getElementById('myInput')
 
-myModal.addEventListener('shown.bs.modal', () => {
-    myInput.focus()
-})
+    myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+    })
 </script>
-
 @endpush

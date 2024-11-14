@@ -55,6 +55,20 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('marcas.index')}}">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Marcas</p>
+                        <!-- <span class="badge badge-success">4</span> -->
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('presentaciones.index')}}">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Presentaciones</p>
+                        <!-- <span class="badge badge-success">4</span> -->
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="">
                         <i class="fas fa-table"></i>
                         <p>Tablas</p>

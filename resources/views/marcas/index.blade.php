@@ -1,6 +1,6 @@
-@extends ('template')
+@extends('template')
 
-@section('title','categorias')
+@section('title', 'marcas')
 
 @push('css')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -30,13 +30,12 @@ Toast.fire({
     title: message
 });
 </script>
-
 @endif
 
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h1 class="fw-bold mb-3">Categorias</h1>
+            <h1 class="fw-bold mb-3">Marcas</h1>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                     <a href="{{route('panel')}}">
@@ -47,11 +46,11 @@ Toast.fire({
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="">Categorias</a>
+                    <a href="">Marcas</a>
                 </li>
             </ul>
             <div class="ms-md-auto py-1 py-md-0">
-                <a href="{{route('categorias.create')}}" class="btn btn-primary btn-round">Agregar Categoria</a>
+                <a href="{{route('marcas.create')}}" class="btn btn-primary btn-round">Agregar Marca</a>
             </div>
         </div>
         <div class="card">
@@ -71,12 +70,12 @@ Toast.fire({
                         </thead>
                         <tbody>
                             <!-- Para recorrer usamos foreach y creamos una variable -->
-                            @foreach ( $categorias as $categoria)
+                            @foreach ( $marcas as $marca)
                             <tr>
-                                <td>{{$categoria->caracteristica->nombre}}</td>
-                                <td>{{$categoria->caracteristica->descripcion}}</td>
+                                <td>{{$marca->caracteristica->nombre}}</td>
+                                <td>{{$marca->caracteristica->descripcion}}</td>
                                 <td>
-                                    @if($categoria->caracteristica->estado==1)
+                                    @if($marca->caracteristica->estado ==1)
                                     <spam>Activo</spam>
                                     @else
                                     <spam>Inactivo</spam>
@@ -85,22 +84,21 @@ Toast.fire({
                                 <td class="text-center">
                                     <div class="btn-group justify-content-center" role="group"
                                         aria-label="Basic mixed styles example">
-                                        <!-- Se pone la ruta, y para editar hace falta enviar la categoria a editar, para ello se pone lo de despues del corchete -->
-                                        <form action="{{route('categorias.edit', ['categoria'=>$categoria])}}"
-                                            method="get">
+                                        <!-- Se pone la ruta, y para editar hace falta enviar la marca a editar, para ello se pone lo de despues del corchete -->
+                                        <form action="{{route('marcas.edit', ['marca'=>$marca])}}" method="get">
                                             @csrf
                                             <button type="submit" class="btn btn-outline-primary me-2">Editar</button>
                                         </form>
-                                        @if ($categoria->caracteristica->estado==1)
+                                        @if ($marca->caracteristica->estado==1)
                                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                                            data-bs-target="#confirmModalCenterTitle-{{$categoria->id}}">
-                                            <!-- Se envia el id de la categoria a eliminar(cambiar estado) -->
+                                            data-bs-target="#confirmModalCenterTitle-{{$marca->id}}">
+                                            <!-- Se envia el id de la marca a eliminar(cambiar estado) -->
                                             Desactivar
                                         </button>
                                         @else
                                         <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                                            data-bs-target="#confirmModalCenterTitle-{{$categoria->id}}">
-                                            <!-- Se envia el id de la categoria a eliminar(cambiar estado) -->
+                                            data-bs-target="#confirmModalCenterTitle-{{$marca->id}}">
+                                            <!-- Se envia el id de la marca a eliminar(cambiar estado) -->
                                             Restaurar
                                         </button>
                                         @endif
@@ -108,8 +106,8 @@ Toast.fire({
                                 </td>
 
                                 <!-- Modal -->
-                                <!-- En el id se recive la información de la categoria a eliminar -->
-                                <div class="modal fade" id="confirmModalCenterTitle-{{$categoria->id}}" tabindex="-1"
+                                <!-- En el id se recive la información de la marca a eliminar -->
+                                <div class="modal fade" id="confirmModalCenterTitle-{{$marca->id}}" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -120,12 +118,12 @@ Toast.fire({
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <!-- Para que aparezca el nombre de la categoria -->
-                                                {{$categoria->caracteristica->estado==1 ? '¿Estás seguro que quieres desactivar esta categoria?':'¿Estás seguro que quieres activar esta categoria?'}}
-                                                <!-- {{$categoria->id}} -->
+                                                <!-- Para que aparezca el nombre de la marca -->
+                                                {{$marca->caracteristica->estado==1 ? '¿Estás seguro que quieres desactivar esta marca?':'¿Estás seguro que quieres activar esta marca?'}}
+                                                <!-- {{$marca->id}} -->
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="{{route('categorias.destroy',['categoria'=>$categoria])}}"
+                                                <form action="{{route('marcas.destroy',['marca'=>$marca])}}"
                                                     method="post">
                                                     @method('DELETE')
                                                     @csrf
@@ -161,5 +159,4 @@ myModal.addEventListener('shown.bs.modal', () => {
     myInput.focus()
 })
 </script>
-
 @endpush
