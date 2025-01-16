@@ -69,6 +69,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('productos.index')}}">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Productos</p>
+                        <!-- <span class="badge badge-success">4</span> -->
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="">
                         <i class="fas fa-table"></i>
                         <p>Tablas</p>

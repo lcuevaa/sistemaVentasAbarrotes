@@ -49,7 +49,8 @@
                 </li>
             </ul>
             <div class="ms-md-auto py-1 py-md-0">
-                <a href="{{route('presentaciones.create')}}" class="btn btn-primary btn-round">Agregar Presentación</a>
+                <a href="{{route('presentaciones.create')}}" class="btn btn-primary btn-round">Agregar
+                    Presentaciones</a>
             </div>
         </div>
         <div class="card">

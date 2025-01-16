@@ -3,6 +3,7 @@
 use App\Http\Controllers\categoriaController;
 use App\Http\Controllers\marcaController;
 use App\Http\Controllers\presentacionController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -11,10 +12,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/panel', 'panel.index')->name('panel');
 
+Route::get('/', function () {
+    return view('template');
+});
+
 Route::resources([
     'categorias' => categoriaController::class,
     'marcas' => marcaController::class,
-    'presentaciones' => presentacionController::class
+    'presentaciones' => presentacionController::class,
+    'productos' => ProductoController::class
 ]);
 
 
